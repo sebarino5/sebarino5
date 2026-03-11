@@ -1,6 +1,6 @@
 # sebarino5
 
-Cyber Security & AI — CTF-Spieler, Tool-Bastler, immer auf der Suche nach der nächsten Challenge.
+Sebastian — ich finde Lücken, bevor es andere tun. Cyber Security, CTF & AI.
 
 ![](https://img.shields.io/badge/Cyber_Security-000000?style=flat&logo=hackthebox&logoColor=white)
 ![](https://img.shields.io/badge/CTF_Player-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
