@@ -1,6 +1,6 @@
-# Hi, ich bin Sebastian 👋
+# sebarino5
 
-Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
+Cyber Security & AI — CTF-Spieler, Tool-Bastler, immer auf der Suche nach der nächsten Challenge.
 
 ![](https://img.shields.io/badge/Cyber_Security-000000?style=flat&logo=hackthebox&logoColor=white)
 ![](https://img.shields.io/badge/CTF_Player-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
@@ -22,4 +22,4 @@ Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
 
 [![Website](https://img.shields.io/badge/stian.ch-000000?style=flat&logo=safari&logoColor=white)](https://stian.ch)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sebastian-röckelein/)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat&logo=github&logoColor=white)](https://github.com/sebarino5)
+[![Email](https://img.shields.io/badge/seb@stian.ch-D14836?style=flat&logo=gmail&logoColor=white)](mailto:seb@stian.ch)
