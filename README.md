@@ -1,4 +1,4 @@
-# Hi, ich bin Sebastian 👋
+# Hi, ich bin der Sebastian 👋
 
 Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
 
