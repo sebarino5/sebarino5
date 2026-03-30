@@ -26,15 +26,6 @@ Cyber Security Enthusiast & AI Enthusiast from Germany.
 
 ---
 
-## 🌐 Languages & Tools
-
-![](https://img.shields.io/badge/Python-informational?style=flat&logo=python&logoColor=white&color=3776AB)
-![](https://img.shields.io/badge/Bash-informational?style=flat&logo=gnubash&logoColor=white&color=4EAA25)
-![](https://img.shields.io/badge/Linux-informational?style=flat&logo=linux&logoColor=white&color=FCC624)
-![](https://img.shields.io/badge/Nmap-informational?style=flat&logo=nmap&logoColor=white&color=000000)
-
----
-
 ## 📬 Contact
 
 [![Website](https://img.shields.io/badge/stian.ch-000000?style=flat&logo=safari&logoColor=white)](https://stian.ch)
