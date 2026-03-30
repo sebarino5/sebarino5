@@ -1,6 +1,6 @@
-# Hi, ich bin der Sebastian 👋
+# Hi, I'm Sebastian 👋
 
-Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
+Cyber Security Enthusiast & AI Nerd from Germany.
 
 ![](https://img.shields.io/badge/Cyber_Security-000000?style=flat&logo=hackthebox&logoColor=white)
 ![](https://img.shields.io/badge/CTF_Player-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
@@ -10,23 +10,23 @@ Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
 
 ---
 
-## 🛠️ Aktuelle Projekte
+## 🛠️ Projects
 
-| Projekt | Beschreibung |
-|--------|-------------|
-| [CTF Scanner](https://github.com/sebarino5/ctf-scanner) | Automatisiertes Scanning-Tool für CTF-Challenges |
+| Project | Description |
+|---------|-------------|
+| [CTF Scanner](https://github.com/sebarino5/ctf-scanner) | Automated scanning tool for CTF challenges |
 
 ---
 
 ## 📝 CTF Writeups
 
-| Raum | Plattform | Schwierigkeit |
-|------|-----------|---------------|
+| Room | Platform | Difficulty |
+|------|----------|------------|
 | [LazyAdmin](writeups/lazyadmin-thm.md) | TryHackMe | Easy |
 
 ---
 
-## 📬 Kontakt
+## 📬 Contact
 
 [![Website](https://img.shields.io/badge/stian.ch-000000?style=flat&logo=safari&logoColor=white)](https://stian.ch)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sebastian-röckelein/)

