@@ -18,6 +18,14 @@ Cyber Security Enthusiast & KI-Begeisterter aus Deutschland.
 
 ---
 
+## 📝 CTF Writeups
+
+| Raum | Plattform | Schwierigkeit |
+|------|-----------|---------------|
+| [LazyAdmin](writeups/lazyadmin-thm.md) | TryHackMe | Easy |
+
+---
+
 ## 📬 Kontakt
 
 [![Website](https://img.shields.io/badge/stian.ch-000000?style=flat&logo=safari&logoColor=white)](https://stian.ch)
