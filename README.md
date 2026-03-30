@@ -26,6 +26,12 @@ Cyber Security Enthusiast & AI Enthusiast from Germany.
 
 ---
 
+## 🏆 Achievements
+
+Always learning — currently focused on CTF challenges and building security tools.
+
+---
+
 ## 📬 Contact
 
 [![Website](https://img.shields.io/badge/stian.ch-000000?style=flat&logo=safari&logoColor=white)](https://stian.ch)
