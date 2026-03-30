@@ -1,6 +1,6 @@
 # Hi, I'm Sebastian 👋
 
-Cyber Security Enthusiast & AI Nerd from Germany.
+Cyber Security Enthusiast & AI Enthusiast from Germany.
 
 ![](https://img.shields.io/badge/Cyber_Security-000000?style=flat&logo=hackthebox&logoColor=white)
 ![](https://img.shields.io/badge/CTF_Player-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
