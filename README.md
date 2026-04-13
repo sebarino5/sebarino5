@@ -3,7 +3,7 @@
 Cyber Security Enthusiast & AI Enthusiast from Germany.
 
 ![](https://img.shields.io/badge/Cyber_Security-000000?style=flat&logo=hackthebox&logoColor=white)
-![](https://img.shields.io/badge/CTF_Player-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
+![](https://img.shields.io/badge/Penetration_Testing-informational?style=flat&logo=hackthebox&logoColor=white&color=9FEF00)
 ![](https://img.shields.io/badge/AI_Enthusiast-informational?style=flat&logo=openai&logoColor=white&color=412991)
 ![](https://img.shields.io/badge/Python-informational?style=flat&logo=python&logoColor=white&color=3776AB)
 ![](https://img.shields.io/badge/Linux-informational?style=flat&logo=linux&logoColor=white&color=FCC624)
@@ -15,14 +15,16 @@ Cyber Security Enthusiast & AI Enthusiast from Germany.
 | Project | Description |
 |---------|-------------|
 | [CTF Scanner](https://github.com/sebarino5/ctf-scanner) | Automated scanning tool for CTF challenges |
+| [Defang](https://github.com/sebarino5/defang) | Web tool for defanging IoCs (URLs, IPs, domains) |
 
 ---
 
-## 📝 CTF Writeups
+## 📝 Security Writeups
 
-| Room | Platform | Difficulty |
-|------|----------|------------|
-| [LazyAdmin](writeups/lazyadmin-thm.md) | TryHackMe | Easy |
+| Title | Type | Difficulty |
+|-------|------|------------|
+| [LazyAdmin](writeups/lazyadmin-thm.md) | TryHackMe CTF | Easy |
+| [Juice Shop - SQL Injection Auth Bypass](https://github.com/sebarino5/juiceshop-sqli) | Pentest Lab | Medium |
 
 ---
 
