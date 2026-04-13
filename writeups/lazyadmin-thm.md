@@ -1,6 +1,6 @@
-# LazyAdmin — TryHackMe Writeup
+# LazyAdmin - TryHackMe Writeup
 
-**Platform:** [TryHackMe — LazyAdmin](https://tryhackme.com/room/lazyadmin)
+**Platform:** [TryHackMe - LazyAdmin](https://tryhackme.com/room/lazyadmin)
 **Difficulty:** Easy
 
 ---
@@ -65,13 +65,13 @@ Output: `www-data` → RCE confirmed.
 
 ## 5. Reverse Shell
 
-**Terminal 1 — Listener:**
+**Terminal 1 - Listener:**
 
 ```bash
 nc -lvnp 4444
 ```
 
-**Terminal 2 — Prepare shell:**
+**Terminal 2 - Prepare shell:**
 
 Save a PHP reverse shell as `.phtml` (set your `<ATTACKER_IP>` and port `4444`).
 
@@ -97,7 +97,7 @@ Flag at: `/home/itguy/user.txt`
 
 ---
 
-## 7. Privilege Escalation — Enumeration
+## 7. Privilege Escalation - Enumeration
 
 ```bash
 sudo -l
