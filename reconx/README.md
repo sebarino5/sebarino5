@@ -1,4 +1,4 @@
-# ReconX — OSINT Recon Tool
+# ReconX - OSINT Recon Tool
 
 A modular OSINT CLI tool for domains, IPs and usernames.
 
