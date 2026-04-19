@@ -23,8 +23,9 @@ Cyber Security Enthusiast & AI Enthusiast from Germany.
 
 | Title | Type | Difficulty |
 |-------|------|------------|
-| [LazyAdmin](writeups/lazyadmin-thm.md) | TryHackMe CTF | Easy |
-| [Juice Shop - SQL Injection Auth Bypass](https://github.com/sebarino5/juiceshop-sqli) | Pentest Lab | Medium |
+| [Juice Shop - SQL Injection Auth Bypass](writeups/01_sqli-auth-bypass/README.md) | Pentest Lab | Medium |
+| [Juice Shop - Broken Access Control](writeups/02_broken-access-control/README.md) | Pentest Lab | Medium |
+| [LazyAdmin](writeups/03_lazyadmin-thm/README.md) | TryHackMe CTF | Easy |
 
 ---
 
