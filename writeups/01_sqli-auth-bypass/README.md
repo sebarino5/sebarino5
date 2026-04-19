@@ -149,10 +149,13 @@ db.query("SELECT * FROM Users WHERE email = ?", [email]);
 
 ### 2. ORM Usage
 
-Use an ORM like Sequelize or TypeORM which handles query parameterization automatically:
+Use an ORM like Sequelize or TypeORM which handles query parameterization automatically. Fetch the user by email only, then verify the password against the stored hash:
 
 ```javascript
-User.findOne({ where: { email: email, password: hashedPassword } });
+const user = await User.findOne({ where: { email } });
+if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+  return res.status(401).send("Invalid credentials");
+}
 ```
 
 ### 3. Input Validation
@@ -166,7 +169,7 @@ if (!emailRegex.test(email)) return res.status(400).send("Invalid input");
 
 ### 4. Least Privilege
 
-The database user used by the application should have read-only access to required tables, not `DROP`, `INSERT`, or schema-level permissions.
+The database user used by the application should be granted only the minimum privileges required on the specific tables it touches (typically `SELECT`, `INSERT`, `UPDATE` on application tables) and must not hold schema-level permissions such as `DROP`, `ALTER`, or `CREATE`. This limits the blast radius if injection still occurs.
 
 ### 5. Error Handling
 
