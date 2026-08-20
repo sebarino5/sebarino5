@@ -27,7 +27,7 @@ Cyber Security Enthusiast & AI Enthusiast from Germany.
 | [Juice Shop - Broken Access Control](writeups/02_broken-access-control/README.md) | Pentest Lab | Medium |
 | [LazyAdmin](writeups/03_lazyadmin-thm/README.md) | TryHackMe CTF | Easy |
 | [ToolsRus](writeups/04_toolsrus-thm/README.md) | TryHackMe CTF | Easy |
-| [Enterprise](writeups/04_enterprise-thm/README.md) | TryHackMe CTF | Not listed |
+| [Enterprise](writeups/04_enterprise-thm/README.md) | TryHackMe CTF | Hard |
 
 ---
 

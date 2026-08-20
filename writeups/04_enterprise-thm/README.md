@@ -4,7 +4,7 @@
 
 **Target:** Windows Active Directory Domain Controller
 
-**Difficulty:** Not listed on the public room page
+**Difficulty:** Hard
 
 > This writeup documents an authorized TryHackMe lab. Target and AttackBox addresses are ephemeral, so the commands use `<TARGET_IP>` and `<ATTACKER_IP>`. Lab passwords, Kerberos material, and both flags are redacted from the public screenshots.
 
